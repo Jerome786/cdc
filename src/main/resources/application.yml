@@ -4,6 +4,6 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/cdc?serverTimezone=UTC
+    url: jdbc:mysql://192.168.52.249:3306/cdc?serverTimezone=UTC
     name: root
     password: 123456
