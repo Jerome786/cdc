@@ -1,24 +1,24 @@
 package com.cdc.train.service;
 
-import com.cdc.train.entity.User;
+import com.cdc.train.entity.UserArticle;
 
 import java.util.List;
 
 /**
- * (User)表服务接口
+ * (UserArticle)表服务接口
  *
  * @author makejava
- * @since 2020-08-25 15:39:54
+ * @since 2020-08-25 15:41:51
  */
-public interface UserService {
+public interface UserArticleService {
 
     /**
      * 通过ID查询单条数据
      *
-     * @param userId 主键
+     * @param id 主键
      * @return 实例对象
      */
-    User queryById(String userId);
+    UserArticle queryById(Integer id);
 
     /**
      * 查询多条数据
@@ -27,30 +27,30 @@ public interface UserService {
      * @param limit  查询条数
      * @return 对象列表
      */
-    List<User> queryAllByLimit(int offset, int limit);
+    List<UserArticle> queryAllByLimit(int offset, int limit);
 
     /**
      * 新增数据
      *
-     * @param user 实例对象
+     * @param userArticle 实例对象
      * @return 实例对象
      */
-    User insert(User user);
+    UserArticle insert(UserArticle userArticle);
 
     /**
      * 修改数据
      *
-     * @param user 实例对象
+     * @param userArticle 实例对象
      * @return 实例对象
      */
-    User update(User user);
+    UserArticle update(UserArticle userArticle);
 
     /**
      * 通过主键删除数据
      *
-     * @param userId 主键
+     * @param id 主键
      * @return 是否成功
      */
-    boolean deleteById(String userId);
+    boolean deleteById(Integer id);
 
 }

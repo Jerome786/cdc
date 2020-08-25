@@ -1,7 +1,7 @@
 package com.cdc.train.controller;
 
-import com.cdc.train.entity.User;
-import com.cdc.train.service.UserService;
+import com.cdc.train.entity.UserArticle;
+import com.cdc.train.service.UserArticleService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
- * (User)表控制层
+ * (UserArticle)表控制层
  *
  * @author makejava
- * @since 2020-08-25 15:40:01
+ * @since 2020-08-25 15:41:51
  */
 @RestController
-@RequestMapping("user")
-public class UserController {
+@RequestMapping("userArticle")
+public class UserArticleController {
     /**
      * 服务对象
      */
     @Resource
-    private UserService userService;
+    private UserArticleService userArticleService;
 
     /**
      * 通过主键查询单条数据
@@ -30,8 +30,8 @@ public class UserController {
      * @return 单条数据
      */
     @GetMapping("selectOne")
-    public User selectOne(String id) {
-        return this.userService.queryById(id);
+    public UserArticle selectOne(Integer id) {
+        return this.userArticleService.queryById(id);
     }
 
 }

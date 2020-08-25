@@ -1,16 +1,16 @@
 package com.cdc.train.service;
 
-import com.cdc.train.entity.User;
+import com.cdc.train.entity.UserInfo;
 
 import java.util.List;
 
 /**
- * (User)表服务接口
+ * (UserInfo)表服务接口
  *
  * @author makejava
- * @since 2020-08-25 15:39:54
+ * @since 2020-08-25 15:42:15
  */
-public interface UserService {
+public interface UserInfoService {
 
     /**
      * 通过ID查询单条数据
@@ -18,7 +18,7 @@ public interface UserService {
      * @param userId 主键
      * @return 实例对象
      */
-    User queryById(String userId);
+    UserInfo queryById(String userId);
 
     /**
      * 查询多条数据
@@ -27,23 +27,23 @@ public interface UserService {
      * @param limit  查询条数
      * @return 对象列表
      */
-    List<User> queryAllByLimit(int offset, int limit);
+    List<UserInfo> queryAllByLimit(int offset, int limit);
 
     /**
      * 新增数据
      *
-     * @param user 实例对象
+     * @param userInfo 实例对象
      * @return 实例对象
      */
-    User insert(User user);
+    UserInfo insert(UserInfo userInfo);
 
     /**
      * 修改数据
      *
-     * @param user 实例对象
+     * @param userInfo 实例对象
      * @return 实例对象
      */
-    User update(User user);
+    UserInfo update(UserInfo userInfo);
 
     /**
      * 通过主键删除数据
