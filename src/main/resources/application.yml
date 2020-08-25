@@ -4,6 +4,11 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.52.249:3306/cdc?serverTimezone=UTC
+    url: jdbc:mysql://192.168.52.249:3306/cdc?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
     name: root
     password: 123456
+
+logging:
+  level:
+    root: info
+  config: classpath:log4j-spring.xml

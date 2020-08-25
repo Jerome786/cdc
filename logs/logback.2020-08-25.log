@@ -1,0 +1,24 @@
+12:02:10.564 logback [main] INFO  com.cdc.train.TrainApplication - Starting TrainApplication on DESKTOP-N6GR9G8 with PID 11492 (D:\core\TrainProject\target\classes started by 秋水、、、学走 in D:\core\TrainProject)
+12:02:10.567 logback [main] INFO  com.cdc.train.TrainApplication - No active profile set, falling back to default profiles: default
+12:02:11.998 logback [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+12:02:12.006 logback [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+12:02:12.007 logback [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+12:02:12.007 logback [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.37]
+12:02:12.093 logback [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+12:02:12.093 logback [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1451 ms
+12:02:12.270 logback [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+12:02:12.699 logback [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+12:02:12.766 logback [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+12:02:12.783 logback [main] INFO  com.cdc.train.TrainApplication - Started TrainApplication in 2.684 seconds (JVM running for 3.091)
+12:04:17.832 logback [main] INFO  com.cdc.train.TrainApplication - Starting TrainApplication on DESKTOP-N6GR9G8 with PID 21852 (D:\core\TrainProject\target\classes started by 秋水、、、学走 in D:\core\TrainProject)
+12:04:17.836 logback [main] INFO  com.cdc.train.TrainApplication - No active profile set, falling back to default profiles: default
+12:04:20.378 logback [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+12:04:20.400 logback [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+12:04:20.401 logback [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+12:04:20.401 logback [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.37]
+12:04:20.547 logback [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+12:04:20.548 logback [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2625 ms
+12:04:20.845 logback [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+12:04:21.346 logback [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+12:04:21.380 logback [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+12:04:21.394 logback [main] INFO  com.cdc.train.TrainApplication - Started TrainApplication in 4.289 seconds (JVM running for 4.943)
