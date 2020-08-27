@@ -4,11 +4,18 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.52.249:3306/cdc?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
-    name: root
+    url: jdbc:mysql://192.168.52.249:3306/cdc?serverTimezone=UTC
     password: 123456
+    username: root
+
+
 
 logging:
   level:
-    root: info
+    com.cdc.train: debug
   config: classpath:log4j-spring.xml
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
