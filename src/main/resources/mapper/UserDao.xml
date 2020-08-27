@@ -22,6 +22,14 @@
         where user_id = #{userId}
     </select>
 
+    <!--根据openId和username查询单个用户-->
+    <select id="queryByOpenIdAndUsername" resultMap="UserMap">
+        select
+          user_id, create_time, update_time, last_login_time, open_id, wechat_number, phone, email, status
+        from cdc.user
+        where user_id = #{userId}
+    </select>
+
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="UserMap">
         select

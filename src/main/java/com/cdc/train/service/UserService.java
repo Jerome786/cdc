@@ -21,6 +21,15 @@ public interface UserService {
     User queryById(String userId);
 
     /**
+     * 通过openID查询单条数据
+     *
+     * @param openId openId
+     * @param username 用户名
+     * @return 实例对象
+     */
+    User queryByOpenIdAndUsername(String openId, String username);
+
+    /**
      * 查询多条数据
      *
      * @param offset 查询起始位置
