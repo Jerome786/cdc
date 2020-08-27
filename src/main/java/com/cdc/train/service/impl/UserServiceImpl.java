@@ -30,6 +30,11 @@ public class UserServiceImpl implements UserService {
         return this.userDao.queryById(userId);
     }
 
+    @Override
+    public User queryByOpenIdAndUsername(String openId, String username) {
+        return this.userDao.queryByOpenIdAndUsername(openId, username);
+    }
+
     /**
      * 查询多条数据
      *
