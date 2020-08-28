@@ -24,11 +24,10 @@ public interface UserDao {
     /**
      * 通过openID查询单条数据
      *
-     * @param openId openId
-     * @param username 用户名
+     * @param user 用户对象
      * @return 实例对象
      */
-    User queryByOpenIdAndUsername(String openId, String username);
+    User queryByUser(User user);
 
     /**
      * 查询指定行数据

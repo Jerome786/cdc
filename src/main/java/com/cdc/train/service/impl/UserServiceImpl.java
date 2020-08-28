@@ -31,8 +31,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User queryByOpenIdAndUsername(String openId, String username) {
-        return this.userDao.queryByOpenIdAndUsername(openId, username);
+    public User queryByUser(User user) {
+        return this.userDao.queryByUser(user);
     }
 
     /**

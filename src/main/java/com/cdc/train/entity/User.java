@@ -1,5 +1,8 @@
 package com.cdc.train.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -22,7 +25,7 @@ public class User implements Serializable {
 
     private String openId;
 
-    private String wechatNumber;
+    private String nickname;
 
     private String phone;
 
@@ -30,6 +33,7 @@ public class User implements Serializable {
 
     private String status;
 
+    private String avatar;
 
     public String getUserId() {
         return userId;
@@ -71,12 +75,12 @@ public class User implements Serializable {
         this.openId = openId;
     }
 
-    public String getWechatNumber() {
-        return wechatNumber;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setWechatNumber(String wechatNumber) {
-        this.wechatNumber = wechatNumber;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getPhone() {
@@ -103,4 +107,11 @@ public class User implements Serializable {
         this.status = status;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 }

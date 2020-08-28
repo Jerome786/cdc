@@ -2,10 +2,7 @@ package com.cdc.train.controller;
 
 import com.cdc.train.entity.User;
 import com.cdc.train.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -27,14 +24,13 @@ public class UserController {
     /**
      * 通过openId和用户名查询该用户是否存在
      *
-     * @param openId openId
-     * @param username 用户名
+     * @param user 用户对象
      * @return 单条数据
      */
-    @GetMapping("checkUser")
-    public String selectOne(@RequestParam("openId") String openId, @RequestParam("username") String username) {
-//        return this.userService.queryByOpenIdAndUsername(openId, username);
-        return "访问成功。。openId："+openId+", username："+username;
+    @PostMapping("checkUser")
+    public User checkUser(@RequestBody User user) {
+
+        return this.userService.queryByUser(user);
     }
 
 }

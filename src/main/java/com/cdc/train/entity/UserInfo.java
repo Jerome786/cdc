@@ -13,8 +13,6 @@ public class UserInfo implements Serializable {
 
     private String userId;
 
-    private String avatar;
-
     private String name;
 
     private String gender;
@@ -28,14 +26,6 @@ public class UserInfo implements Serializable {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
     }
 
     public String getName() {
