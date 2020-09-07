@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Random;
 
 /**
  * (Comment)表服务实现类
@@ -43,15 +44,26 @@ public class CommentServiceImpl implements CommentService {
     }
 
     /**
-     * 新增数据
+     * 新增评论
      *
      * @param comment 实例对象
      * @return 实例对象
      */
     @Override
-    public Comment insert(Comment comment) {
+    public Comment insertComment(Comment comment) {
+        comment.setCommentId(getID());
         this.commentDao.insert(comment);
         return comment;
+    }
+    //生成9位数的数字ID
+    private Integer getID() {
+        String val = "";
+        Random random = new Random();
+        for (int i = 0; i < 9; i++) {
+            val += String.valueOf(random.nextInt(10));
+        }
+        Integer ID = Integer.valueOf(val);
+        return ID;
     }
 
     /**
@@ -75,5 +87,16 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public boolean deleteById(Integer commentId) {
         return this.commentDao.deleteById(commentId) > 0;
+    }
+
+    /**
+     * 文章id查询所有评论
+     * @param comment
+     * @return
+     */
+    @Override
+    public List selectByArticleId(Comment comment) {
+        List<Comment> list = commentDao.queryAll(comment);
+        return list;
     }
 }
