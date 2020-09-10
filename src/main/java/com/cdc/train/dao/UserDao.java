@@ -2,6 +2,7 @@ package com.cdc.train.dao;
 
 import com.cdc.train.entity.User;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public interface UserDao {
      * @param user 用户对象
      * @return 实例对象
      */
-    User queryByUser(User user);
+    User queryByUser(@Param("user") User user);
 
     /**
      * 查询指定行数据
@@ -36,7 +37,7 @@ public interface UserDao {
      * @param limit  查询条数
      * @return 对象列表
      */
-    List<User> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<User> queryAllByLimit(int offset, int limit);
 
 
     /**
@@ -61,7 +62,7 @@ public interface UserDao {
      * @param user 实例对象
      * @return 影响行数
      */
-    int update(User user);
+    int update(@Param("user") User user);
 
     /**
      * 通过主键删除数据

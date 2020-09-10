@@ -4,6 +4,7 @@ import com.cdc.train.dao.UserDao;
 import com.cdc.train.entity.User;
 import com.cdc.train.service.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -54,9 +55,8 @@ public class UserServiceImpl implements UserService {
      * @return 实例对象
      */
     @Override
-    public User insert(User user) {
-        this.userDao.insert(user);
-        return user;
+    public int insert(User user) {
+       return this.userDao.insert(user);
     }
 
     /**
@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User update(User user) {
-        this.userDao.update(user);
+         this.userDao.update(user);
         return this.queryById(user.getUserId());
     }
 
