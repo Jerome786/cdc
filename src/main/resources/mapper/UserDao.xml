@@ -16,7 +16,7 @@
         <result property="deptId" column="dept_id" jdbcType="VARCHAR" />
     </resultMap>
 
-    <!--查询单个-->
+    <!--通过用户id查询单个-->
     <select id="queryById" resultMap="UserMap" parameterType="String">
         select
           user_id, create_time, update_time, last_login_time, nickname, phone, email, status, avatar, dept_id
