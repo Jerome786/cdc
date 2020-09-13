@@ -1,8 +1,11 @@
 package com.cdc.train.service;
 
+import com.cdc.train.common.Result;
 import com.cdc.train.entity.User;
+import com.cdc.train.entity.dto.UserDTO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * (User)表服务接口
@@ -18,7 +21,7 @@ public interface UserService {
      * @param userId 主键
      * @return 实例对象
      */
-    User queryById(String userId);
+    Result queryById(String userId);
 
     /**
      * 通过userId、nickname验证单条数据
@@ -43,7 +46,7 @@ public interface UserService {
      * @param user 实例对象
      * @return 实例对象
      */
-    int insert(User user);
+    Result insert(UserDTO user);
 
     /**
      * 修改数据
@@ -61,4 +64,9 @@ public interface UserService {
      */
     boolean deleteById(String userId);
 
+    Result queryAllUser(Map<String,Object> params);
+
+    Result updateStatus(Map<String, Object> params);
+
+    Result checkUser(Map<String, Object> params);
 }

@@ -1,10 +1,13 @@
 package com.cdc.train.dao;
 
+import com.cdc.train.common.Result;
 import com.cdc.train.entity.User;
+import com.cdc.train.entity.dto.UserDTO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * (User)表数据库访问层
@@ -20,7 +23,7 @@ public interface UserDao {
      * @param userId 主键
      * @return 实例对象
      */
-    User queryById(String userId);
+    UserDTO queryById(String userId);
 
     /**
      * 通过openID查询单条数据
@@ -46,7 +49,7 @@ public interface UserDao {
      * @param user 实例对象
      * @return 对象列表
      */
-    List<User> queryAll(User user);
+    List<UserDTO> queryAll(Map<String,Object> params);
 
     /**
      * 新增数据
@@ -72,4 +75,5 @@ public interface UserDao {
      */
     int deleteById(String userId);
 
+    int updateStatus(Map<String, Object> params);
 }

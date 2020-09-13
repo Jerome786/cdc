@@ -3,13 +3,16 @@ package com.cdc.train.controller;
 import com.cdc.train.common.Result;
 import com.cdc.train.common.ResultCode;
 import com.cdc.train.entity.User;
+import com.cdc.train.entity.dto.UserDTO;
 import com.cdc.train.service.UserService;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 import jdk.nashorn.internal.ir.ReturnNode;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (User)表控制层
@@ -26,19 +29,28 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    /**
-     * 通过 userId 和用户名查询该用户是否存在
-     *
-     * @param user 用户对象
-     * @return 单条数据
-     */
-    @PostMapping("checkUser")
-    public Result queryByUser(@RequestBody User user) {
-        User checkUser = this.userService.queryByUser(user);
-        if (checkUser != null){
-            return new Result(ResultCode.SUCCESS,checkUser);
+    @RequestMapping("checkUser")
+    public Result checkUser(@RequestBody Map<String,Object> params){
+        if (params.isEmpty()||!params.containsKey("userId")) {
+            return new Result(ResultCode.ERROR,"参数为空");
         }
-            return new Result(ResultCode.PARAM_IS_INVALID);
+        try {
+            return userService.checkUser(params);
+        }catch (Exception e){
+            return new Result(ResultCode.ERROR, "保存失败：" + e.getMessage());
+        }
+    }
+
+    @RequestMapping("updateStatus")
+    public Result updateStatus(@RequestBody Map<String,Object> params){
+        if (params.isEmpty()||!params.containsKey("status")||!params.containsKey("userId")) {
+            return new Result(ResultCode.ERROR,"参数为空");
+        }
+        try {
+            return userService.updateStatus(params);
+        }catch (Exception e){
+            return new Result(ResultCode.ERROR, "保存失败：" + e.getMessage());
+        }
     }
 
     /***
@@ -47,12 +59,12 @@ public class UserController {
      * @return
      */
     @PostMapping("addUser")
-    public Result insertUser(@RequestBody User user){
-        int num = userService.insert(user);
-        if(num > 0 ){
-            return new Result(ResultCode.SUCCESS,"添加成功");
+    public Result insertUser(@RequestBody UserDTO user){
+        try {
+            return userService.insert(user);
+        }catch (Exception e){
+            return new Result(ResultCode.ERROR, "保存失败：" + e.getMessage());
         }
-        return new Result(ResultCode.PARAM_IS_INVALID,"添加失败");
     }
 
 
@@ -62,12 +74,15 @@ public class UserController {
      * @return
      */
     @PostMapping("queryById")
-    public Result queryById(@RequestParam String userId){
-        User user =  userService.queryById(userId);
-        if(user != null ){
-            return new Result(ResultCode.SUCCESS,user);
+    public Result queryById(@RequestBody Map<String,Object> params){
+        if (params.isEmpty()&&params.containsKey("userId")) {
+            return new Result(ResultCode.ERROR,"参数为空");
         }
-        return new Result(ResultCode.PARAM_IS_INVALID,"该用户不存在");
+        try {
+            return userService.queryById(params.get("userId").toString());
+        }catch (Exception e){
+            return new Result(ResultCode.ERROR, "保存失败：" + e.getMessage());
+        }
     }
 
 
@@ -86,16 +101,15 @@ public class UserController {
     }
 
     /***
-     *  通过 offset 和 limit
-     * @param offset
-     * @param limit
      * @return
      */
-    @PostMapping("queryAllByLimit")
-    public Result queryAllByLimit(int offset, int limit) {
-        List<User> listUser = null;
-        listUser = userService.queryAllByLimit(offset, limit);
-        return new Result(ResultCode.SUCCESS, listUser);
+    @PostMapping("queryAllUser")
+    public Result queryAllUser(@RequestBody Map<String,Object> params) {
+        try {
+            return userService.queryAllUser(params);
+        }catch (Exception e){
+            return new Result(ResultCode.ERROR, "保存失败：" + e.getMessage());
+        }
     }
 
 

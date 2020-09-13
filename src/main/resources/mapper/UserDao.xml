@@ -16,12 +16,22 @@
         <result property="deptId" column="dept_id" jdbcType="VARCHAR" />
     </resultMap>
 
+    <resultMap id="ResultDTO" type="com.cdc.train.entity.dto.UserDTO" extends="UserMap">
+        <result property="roleId" column="roleId" jdbcType="VARCHAR" />
+        <result property="roleName" column="roleName" jdbcType="VARCHAR" />
+        <result property="realName" column="realName" jdbcType="VARCHAR" />
+        <result property="gender" column="gender" jdbcType="VARCHAR" />
+    </resultMap>
     <!--通过用户id查询单个-->
-    <select id="queryById" resultMap="UserMap" parameterType="String">
+    <select id="queryById" resultMap="ResultDTO" parameterType="String">
         select
-          user_id, create_time, update_time, last_login_time, nickname, phone, email, status, avatar, dept_id
-        from cdc.user
-        where user_id = #{userId}
+          u.user_id, create_time, update_time, last_login_time, nickname, phone, email, status, avatar, dept_id,ui.name as realName,
+          ui.gender,r.name as roleName
+        from cdc.user u
+        left join user_info ui on u.user_id = ui.user_id
+        left join user_role ur on u.user_id = ur.user_id
+        left join role r on ur.role_id = r.role_id
+        where u.user_id = #{userId}
     </select>
 
     <!--根据openId和nickname查询单个用户-->
@@ -45,85 +55,28 @@
     </select>
 
     <!--通过实体作为筛选条件查询-->
-    <select id="queryAll" resultMap="UserMap">
+    <select id="queryAll" resultMap="ResultDTO">
         select
-        user_id, create_time, update_time, last_login_time, nickname, phone, email, status, dept_id
-        from cdc.user
-        <where>
-            <if test="userId != null and userId != ''">
-                and user_id = #{userId}
-            </if>
-            <if test="createTime != null">
-                and create_time = #{createTime}
-            </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime}
-            </if>
-            <if test="lastLoginTime != null">
-                and last_login_time = #{lastLoginTime}
-            </if>
-            <if test="nickname != null and nickname != ''">
-                and nickname = #{nickname}
-            </if>
-            <if test="phone != null and phone != ''">
-                and phone = #{phone}
-            </if>
-            <if test="email != null and email != ''">
-                and email = #{email}
-            </if>
-            <if test="status != null and status != ''">
-                and status = #{status}
-            </if>
-            <if test="avatar != null and avatar != ''">
-                and avatar = #{avatar}
-            </if>
-            <if test="dept_id != null  and dept_id != ''">
-                and dept_id = #{deptId}
-            </if>
-        </where>
+        u.user_id, create_time, nickname, avatar, status,ui.name as realName
+        from cdc.user u
+        left join user_info ui on u.user_id = ui.user_id
+        left join user_role ur on u.user_id = ur.user_id
+        where ur.role_id = "2"
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
-        insert into cdc.user(user_id,create_time, update_time, last_login_time, nickname, phone, email, avatar, dept_id)
-        values (#{userId}, #{createTime}, #{updateTime}, #{lastLoginTime}, #{nickname}, #{phone}, #{email}, #{avatar}, #{deptId})
+        insert into cdc.user(user_id,create_time, nickname, phone, email, avatar, dept_id,status)
+        values (#{userId}, #{createTime},#{nickname}, #{phone}, #{email}, #{avatar}, #{deptId},#{status})
     </insert>
 
 
 
-    <!--通过主键修改数据-->
-    <update id="update">
+    <!--通过主键修改状态-->
+    <update id="updateStatus">
         update cdc.user
-        <set>
-            <if test="user.createTime != null">
-                create_time = #{user.createTime},
-            </if>
-            <if test="user.updateTime != null">
-                update_time = #{user.updateTime},
-            </if>
-            <if test="user.lastLoginTime != null">
-                last_login_time = #{user.lastLoginTime},
-            </if>
-            <if test="user.nickname != null and user.nickname != ''">
-                nickname = #{user.nickname},
-            </if>
-            <if test="user.phone != null and user.phone != ''">
-                phone = #{user.phone},
-            </if>
-            <if test="user.email != null and user.email != ''">
-                email = #{email},
-            </if>
-            <if test="user.status != null and user.status != ''">
-                status = #{user.status},
-            </if>
-            <if test="user.avatar != null and user.avatar != ''">
-                avatar = #{user.avatar},
-            </if>
-            <if test="user.deptId != null and user.deptId != ''">
-                dept_id = #{user.deptId}
-            </if>
-        </set>
-        where user_id = #{user.userId}
+           set status = #{status}
+        where user_id = #{userId}
     </update>
 
     <!--通过主键删除-->

@@ -1,13 +1,24 @@
 package com.cdc.train.service.impl;
 
+import com.cdc.train.common.Result;
+import com.cdc.train.common.ResultCode;
 import com.cdc.train.dao.UserDao;
+import com.cdc.train.dao.UserInfoDao;
 import com.cdc.train.entity.User;
+import com.cdc.train.entity.UserInfo;
+import com.cdc.train.entity.dto.UserDTO;
 import com.cdc.train.service.UserService;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (User)表服务实现类
@@ -19,6 +30,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Resource
     private UserDao userDao;
+    @Autowired
+    private UserInfoDao userInfoDao;
 
     /**
      * 通过ID查询单条数据
@@ -27,8 +40,15 @@ public class UserServiceImpl implements UserService {
      * @return 实例对象
      */
     @Override
-    public User queryById(String userId) {
-        return this.userDao.queryById(userId);
+    public Result queryById(String userId) {
+        if (StringUtils.isEmpty(userId)){
+            return new Result(ResultCode.ERROR,"userId为空");
+        }
+        UserDTO userDTO = userDao.queryById(userId);
+        if (userDTO!=null){
+            return new Result(ResultCode.SUCCESS,userDTO);
+        }
+        return new Result(ResultCode.ERROR,null);
     }
 
     @Override
@@ -55,8 +75,45 @@ public class UserServiceImpl implements UserService {
      * @return 实例对象
      */
     @Override
-    public int insert(User user) {
-       return this.userDao.insert(user);
+    @Transactional
+    public Result insert(UserDTO user) {
+        if (user == null) {
+            return new Result(ResultCode.ERROR,"传进来参数为空");
+        }
+        if (user.getUserId() == null) {
+            return new Result(ResultCode.ERROR,"openId为空");
+        }
+        if (StringUtils.isEmpty(user.getPhone()) || StringUtils.isEmpty(user.getEmail())) {
+            return new Result(ResultCode.ERROR,"手机号/邮箱为空");
+        }
+        if (StringUtils.isEmpty(user.getGender()) || StringUtils.isEmpty(user.getRealName())) {
+            return new Result(ResultCode.ERROR,"性别/真名为空");
+        }
+        if (StringUtils.isEmpty(user.getDeptId()) || StringUtils.isEmpty(user.getRoleId())) {
+            return new Result(ResultCode.ERROR,"部门/角色为空");
+        }
+        if (userInfoDao.queryById(user.getUserId())!=null){
+            return new Result(ResultCode.ERROR,"该用户已存在");
+        }
+        if (StringUtils.isEmpty(user.getAvatar()) || StringUtils.isEmpty(user.getNickname())) {
+            return new Result(ResultCode.ERROR,"头像/昵称为空");
+        }
+
+        UserInfo userInfo = new UserInfo();
+
+        userInfo.setUserId(user.getUserId());
+        userInfo.setName(user.getRealName());
+        userInfo.setGender(user.getGender());
+        userInfoDao.insert(userInfo);
+
+        User newUser = new User();
+        BeanUtils.copyProperties(user,newUser);
+        //未审核
+        user.setStatus("0");
+        user.setCreateTime(new Date());
+
+        userDao.insert(user);
+        return new Result(ResultCode.SUCCESS,"操作成功");
     }
 
     /**
@@ -68,7 +125,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User update(User user) {
          this.userDao.update(user);
-        return this.queryById(user.getUserId());
+         this.queryById(user.getUserId());
+         return new User();
     }
 
     /**
@@ -80,5 +138,30 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteById(String userId) {
         return this.userDao.deleteById(userId) > 0;
+    }
+
+    @Override
+    public Result queryAllUser(Map<String,Object> params) {
+        List<UserDTO> userList = userDao.queryAll(params);
+        return new Result(ResultCode.SUCCESS, CollectionUtils.isEmpty(userList)?null:userList);
+    }
+
+    @Override
+    public Result updateStatus(Map<String, Object> params) {
+        String userId = params.get("userId").toString();
+        if (userDao.queryById(userId)==null){
+            return new Result(ResultCode.ERROR,"该用户不存在");
+        }
+        userDao.updateStatus(params);
+        return new Result(ResultCode.SUCCESS,"更新成功");
+    }
+
+    @Override
+    public Result checkUser(Map<String, Object> params) {
+        UserDTO userDTO = userDao.queryById(params.get("userId").toString());
+        if (userDTO==null||userDTO.getStatus().equals("1")){
+            return new Result(ResultCode.ERROR,"用户不存在");
+        }
+        return new Result(ResultCode.SUCCESS,userDTO);
     }
 }
