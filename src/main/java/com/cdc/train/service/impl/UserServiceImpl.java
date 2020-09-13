@@ -159,7 +159,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Result checkUser(Map<String, Object> params) {
         UserDTO userDTO = userDao.queryById(params.get("userId").toString());
-        if (userDTO==null||userDTO.getStatus().equals("1")){
+        if (userDTO==null||!userDTO.getStatus().equals("1")){
             return new Result(ResultCode.ERROR,"用户不存在");
         }
         return new Result(ResultCode.SUCCESS,userDTO);
