@@ -30,9 +30,9 @@ public class CommentController {
      * @param id 主键
      * @return 单条数据
      */
-    @RequestMapping(value = "/selectOne", method = { RequestMethod.GET, RequestMethod.POST })
-    public Comment selectOne(Integer id) {
-        return this.commentService.queryById(id);
+    @RequestMapping(value = "/selectOne/{Id}", method = { RequestMethod.GET, RequestMethod.POST })
+    public Comment selectOne(@PathVariable("Id") Integer Id) {
+        return this.commentService.queryById(Id);
     }
 
     /**
@@ -41,13 +41,18 @@ public class CommentController {
      * @return
      */
     @RequestMapping(value = "/save", method = { RequestMethod.GET, RequestMethod.POST })
-    public ResponseEntity<Void> insertComment(@RequestBody Comment comment){
+    public Object insertComment(@RequestBody Comment comment){
         if (comment.getCommentId()==null||comment.getCommentId().equals("")){
-            if (comment.getContent()==null||comment.getContent()==""){  //评论为空
+            if (comment.getContent()==null||comment.getContent().equals("")){  //评论为空
                 return ResponseEntity.status(HttpStatus.NOT_MODIFIED).build();
             }
             commentService.insertComment(comment);
         }else {
+            String content = comment.getContent();
+            String oldContent = commentService.queryById(comment.getCommentId()).getContent();
+            if (content.equals(oldContent)){
+                return ResponseEntity.status(HttpStatus.NOT_MODIFIED).build();
+            }
             commentService.update(comment);
         }
         return ResponseEntity.status(HttpStatus.OK).build();
@@ -58,9 +63,9 @@ public class CommentController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/delete", method = { RequestMethod.GET, RequestMethod.POST })
-    public ResponseEntity<Void> deleteCommentById(Integer id) {
-        if (this.commentService.deleteById(id)) {
+    @RequestMapping(value = "/delete/{Id}", method = { RequestMethod.GET, RequestMethod.POST })
+    public Object deleteCommentById(@PathVariable("Id") Integer Id) {
+        if (this.commentService.deleteById(Id)) {
             return  ResponseEntity.status(HttpStatus.NOT_MODIFIED).build();
         }
         return  ResponseEntity.status(HttpStatus.OK).build();
@@ -71,8 +76,8 @@ public class CommentController {
      * @param articleId
      * @return
      */
-    @RequestMapping(value = "/selectByArticleId", method = { RequestMethod.GET, RequestMethod.POST })
-    public ResponseEntity<List> selectByArticleId(Integer articleId) {
+    @RequestMapping(value = "/selectByArticleId/{articleId}", method = { RequestMethod.GET, RequestMethod.POST })
+    public Object selectByArticleId(@PathVariable("articleId") Integer articleId) {
         Comment comment = new Comment();
         comment.setArticleId(articleId);
         List list=commentService.selectByArticleId(comment);

@@ -51,19 +51,8 @@ public class CommentServiceImpl implements CommentService {
      */
     @Override
     public Comment insertComment(Comment comment) {
-        comment.setCommentId(getID());
         this.commentDao.insert(comment);
         return comment;
-    }
-    //生成9位数的数字ID
-    private Integer getID() {
-        String val = "";
-        Random random = new Random();
-        for (int i = 0; i < 9; i++) {
-            val += String.valueOf(random.nextInt(10));
-        }
-        Integer ID = Integer.valueOf(val);
-        return ID;
     }
 
     /**
