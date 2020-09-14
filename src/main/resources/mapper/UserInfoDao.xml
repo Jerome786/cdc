@@ -11,10 +11,8 @@
 
     <!--查询单个-->
     <select id="queryById" resultMap="UserInfoMap">
-        select
-          user_id, avatar, name, gender, address
-        from cdc.user_info
-        where user_id = #{userId}
+        select user_id,`name`, gender from cdc.user_info
+        where user_id=#{userId}
     </select>
 
     <!--查询指定行数据-->
@@ -51,8 +49,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
-        insert into cdc.user_info(avatar, name, gender, address)
-        values (#{avatar}, #{name}, #{gender}, #{address})
+        insert into cdc.user_info(user_id, name, gender)
+        values (#{userId}, #{name}, #{gender})
     </insert>
 
     <!--通过主键修改数据-->

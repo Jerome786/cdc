@@ -8,6 +8,8 @@ public enum ResultCode {
 
     /* 成功状态码 */
     SUCCESS(0, "成功"),
+    /* 成功状态码 */
+    ERROR(1, "失败"),
 
     /* 系统500错误*/
     SYSTEM_ERROR(10000, "系统异常，请稍后重试"),
@@ -16,7 +18,10 @@ public enum ResultCode {
     PARAM_IS_INVALID(10001, "参数无效"),
 
     /* 用户错误：20001-29999*/
-    USER_HAS_EXISTED(20001, "用户名已存在");
+    USER_HAS_EXISTED(20001, "用户名已存在"),
+
+    /* 用户错误：20001-29999*/
+    TYPE_NOT_FOUND(20002,"分类不存在");
 
     private Integer code;
 

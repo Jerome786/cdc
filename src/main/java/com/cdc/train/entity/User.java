@@ -23,7 +23,7 @@ public class User implements Serializable {
 
     private Date lastLoginTime;
 
-    private String openId;
+//    private String openId;
 
     private String nickname;
 
@@ -34,6 +34,20 @@ public class User implements Serializable {
     private String status;
 
     private String avatar;
+
+    private String deptId;
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public String getUserId() {
         return userId;
@@ -67,13 +81,13 @@ public class User implements Serializable {
         this.lastLoginTime = lastLoginTime;
     }
 
-    public String getOpenId() {
-        return openId;
-    }
-
-    public void setOpenId(String openId) {
-        this.openId = openId;
-    }
+//    public String getOpenId() {
+//        return openId;
+//    }
+//
+//    public void setOpenId(String openId) {
+//        this.openId = openId;
+//    }
 
     public String getNickname() {
         return nickname;
