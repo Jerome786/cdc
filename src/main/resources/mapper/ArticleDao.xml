@@ -16,9 +16,15 @@
 
     </resultMap>
 
-    <select id="selFavoriteByUserId" resultMap="ArticleMap">
-        select a.article_id, a.title, a.images
-        from user_article au left join article a on au.user_id = a.user_id
+    <resultMap id="ResultDTO" type="com.cdc.train.entity.dto.ArticleDTO" extends="ArticleMap">
+        <result property="pulisher" column="pulisher" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selFavoriteByUserId" resultMap="ResultDTO">
+        select a.article_id, a.title, a.images,u.nickname as pulisher,a.create_time,a.user_id
+        from user_article au
+        left join article a on au.user_id = a.user_id
+        left join user u on a.user_id =  u.user_id
         where au.user_id = #{userId} and au.favorite = 1 and a.`condition` = 1
     </select>
 
@@ -32,7 +38,7 @@
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ArticleMap">
-        select article_id, title,content, images,price
+        select article_id, title,content, images,price,create_time,user_id
         from cdc.article
         <where>
             <if test="userId != null and userId != ''">
