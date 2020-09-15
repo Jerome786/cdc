@@ -30,6 +30,15 @@ public class Article implements Serializable {
 
     private String condition;
 
+    private double price;
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
     public Integer getArticleId() {
         return articleId;

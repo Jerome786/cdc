@@ -12,6 +12,8 @@
         <result property="userId" column="user_id" jdbcType="VARCHAR"/>
         <result property="status" column="status" jdbcType="VARCHAR"/>
         <result property="condition" column="condition" jdbcType="VARCHAR"/>
+        <result property="price" column="price" jdbcType="DOUBLE"/>
+
     </resultMap>
 
     <select id="selFavoriteByUserId" resultMap="ArticleMap">
@@ -23,14 +25,14 @@
     <!--查询单个-->
     <select id="queryById" resultMap="ArticleMap">
         select
-          article_id, title, content, images, create_time, update_time, user_id, status
+          article_id, title, content, images, create_time, update_time, user_id, status,price
         from cdc.article
         where article_id = #{articleId} AND `condition` = 1
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ArticleMap">
-        select article_id, title,content, images
+        select article_id, title,content, images,price
         from cdc.article
         <where>
             <if test="userId != null and userId != ''">
@@ -42,7 +44,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="ArticleMap">
         select
-        article_id, title, content, images, create_time, update_time, user_id, status, condition
+        article_id, title, content, images, create_time, update_time, user_id, status, condition,price
         from cdc.article
         <where>
             <if test="articleId != null">
