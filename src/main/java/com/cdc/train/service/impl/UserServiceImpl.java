@@ -30,7 +30,7 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
     @Resource
     private UserDao userDao;
-    @Autowired
+    @Resource
     private UserInfoDao userInfoDao;
 
     /**
@@ -119,14 +119,27 @@ public class UserServiceImpl implements UserService {
     /**
      * 修改数据
      *
-     * @param user 实例对象
+     * @param params 实例对象
      * @return 实例对象
      */
     @Override
-    public User update(User user) {
-         this.userDao.update(user);
-         this.queryById(user.getUserId());
-         return new User();
+    @Transactional
+    public Result update(Map<String,Object> params) {
+        int result;
+        if (params.isEmpty()||params.containsKey("userId")){
+            return new Result(ResultCode.ERROR,"参数或userId为空");
+        }
+        UserDTO queryById = userDao.queryById(params.get("userId").toString());
+        if (queryById==null){
+            return new Result(ResultCode.ERROR,"不存在该用户");
+        }
+
+        result = userDao.update(params);
+        result = userInfoDao.update(params);
+        if (result<=0){
+            return new Result(ResultCode.ERROR,"没有数据更新");
+        }
+        return new Result(ResultCode.SUCCESS,"操作成功");
     }
 
     /**
@@ -152,7 +165,7 @@ public class UserServiceImpl implements UserService {
         if (userDao.queryById(userId)==null){
             return new Result(ResultCode.ERROR,"该用户不存在");
         }
-        userDao.updateStatus(params);
+        userDao.update(params);
         return new Result(ResultCode.SUCCESS,"更新成功");
     }
 

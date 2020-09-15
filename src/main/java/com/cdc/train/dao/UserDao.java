@@ -46,7 +46,7 @@ public interface UserDao {
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param user 实例对象
+     * @param params 实例对象
      * @return 对象列表
      */
     List<UserDTO> queryAll(Map<String,Object> params);
@@ -62,10 +62,10 @@ public interface UserDao {
     /**
      * 修改数据
      *
-     * @param user 实例对象
+     * @param params 实例对象
      * @return 影响行数
      */
-    int update(@Param("user") User user);
+    int update(Map<String,Object> params);
 
     /**
      * 通过主键删除数据
@@ -75,5 +75,4 @@ public interface UserDao {
      */
     int deleteById(String userId);
 
-    int updateStatus(Map<String, Object> params);
 }

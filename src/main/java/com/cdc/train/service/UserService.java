@@ -51,10 +51,10 @@ public interface UserService {
     /**
      * 修改数据
      *
-     * @param user 实例对象
+     * @param params 实例对象
      * @return 实例对象
      */
-    User update(User user);
+    Result update(Map<String,Object> params);
 
     /**
      * 通过主键删除数据

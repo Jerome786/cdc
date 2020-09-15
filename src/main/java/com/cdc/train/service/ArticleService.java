@@ -1,8 +1,10 @@
 package com.cdc.train.service;
 
+import com.cdc.train.common.Result;
 import com.cdc.train.entity.Article;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Article)表服务接口
@@ -18,39 +20,17 @@ public interface ArticleService {
      * @param articleId 主键
      * @return 实例对象
      */
-    Article queryById(Integer articleId);
+    Result queryById(int articleId);
 
     /**
      * 查询多条数据
      *
-     * @param offset 查询起始位置
-     * @param limit  查询条数
      * @return 对象列表
      */
-    List<Article> queryAllByLimit(int offset, int limit);
+    Result queryAllByLimit(Map<String,Object> params);
 
-    /**
-     * 新增数据
-     *
-     * @param article 实例对象
-     * @return 实例对象
-     */
-    Article insert(Article article);
 
-    /**
-     * 修改数据
-     *
-     * @param article 实例对象
-     * @return 实例对象
-     */
-    Article update(Article article);
 
-    /**
-     * 通过主键删除数据
-     *
-     * @param articleId 主键
-     * @return 是否成功
-     */
-    boolean deleteById(Integer articleId);
 
+    Result selFavoriteByUserId(Map<String, Object> params);
 }

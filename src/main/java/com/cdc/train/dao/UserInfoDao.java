@@ -4,6 +4,7 @@ import com.cdc.train.entity.UserInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * (UserInfo)表数据库访问层
@@ -50,10 +51,10 @@ public interface UserInfoDao {
     /**
      * 修改数据
      *
-     * @param userInfo 实例对象
+     * @param params 实例对象
      * @return 影响行数
      */
-    int update(UserInfo userInfo);
+    int update(Map<String,Object> params);
 
     /**
      * 通过主键删除数据

@@ -14,20 +14,29 @@
         <result property="condition" column="condition" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <select id="selFavoriteByUserId" resultMap="ArticleMap">
+        select a.article_id, a.title, a.images
+        from user_article au left join article a on au.user_id = a.user_id
+        where au.user_id = #{userId} and au.favorite = 1 and a.`condition` = 1
+    </select>
+
     <!--查询单个-->
     <select id="queryById" resultMap="ArticleMap">
         select
-          article_id, title, content, images, create_time, update_time, user_id, status, condition
+          article_id, title, content, images, create_time, update_time, user_id, status
         from cdc.article
-        where article_id = #{articleId}
+        where article_id = #{articleId} AND `condition` = 1
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ArticleMap">
-        select
-          article_id, title, content, images, create_time, update_time, user_id, status, condition
+        select article_id, title,content, images
         from cdc.article
-        limit #{offset}, #{limit}
+        <where>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+        </where>
     </select>
 
     <!--通过实体作为筛选条件查询-->

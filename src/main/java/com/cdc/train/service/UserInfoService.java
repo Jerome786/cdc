@@ -37,20 +37,7 @@ public interface UserInfoService {
      */
     UserInfo insert(UserInfo userInfo);
 
-    /**
-     * 修改数据
-     *
-     * @param userInfo 实例对象
-     * @return 实例对象
-     */
-    UserInfo update(UserInfo userInfo);
 
-    /**
-     * 通过主键删除数据
-     *
-     * @param userId 主键
-     * @return 是否成功
-     */
-    boolean deleteById(String userId);
+
 
 }

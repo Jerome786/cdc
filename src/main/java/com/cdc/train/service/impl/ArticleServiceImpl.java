@@ -1,12 +1,16 @@
 package com.cdc.train.service.impl;
 
+import com.cdc.train.common.Result;
+import com.cdc.train.common.ResultCode;
 import com.cdc.train.dao.ArticleDao;
 import com.cdc.train.entity.Article;
 import com.cdc.train.service.ArticleService;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Article)表服务实现类
@@ -26,54 +30,30 @@ public class ArticleServiceImpl implements ArticleService {
      * @return 实例对象
      */
     @Override
-    public Article queryById(Integer articleId) {
-        return this.articleDao.queryById(articleId);
+    public Result queryById(int articleId) {
+        Article article = articleDao.queryById(articleId);
+        if (article == null){
+            return new Result(ResultCode.ERROR,"文章不存在");
+        }
+        return new Result(ResultCode.SUCCESS,article);
     }
 
     /**
      * 查询多条数据
      *
-     * @param offset 查询起始位置
-     * @param limit  查询条数
      * @return 对象列表
      */
     @Override
-    public List<Article> queryAllByLimit(int offset, int limit) {
-        return this.articleDao.queryAllByLimit(offset, limit);
+    public Result queryAllByLimit(Map<String,Object> params) {
+        List<Article> articles = this.articleDao.queryAllByLimit(params);
+        return new Result(ResultCode.SUCCESS,articles);
     }
 
-    /**
-     * 新增数据
-     *
-     * @param article 实例对象
-     * @return 实例对象
-     */
     @Override
-    public Article insert(Article article) {
-        this.articleDao.insert(article);
-        return article;
+    public Result selFavoriteByUserId(Map<String, Object> params) {
+
+        return new Result(ResultCode.SUCCESS,articleDao.selFavoriteByUserId(params));
     }
 
-    /**
-     * 修改数据
-     *
-     * @param article 实例对象
-     * @return 实例对象
-     */
-    @Override
-    public Article update(Article article) {
-        this.articleDao.update(article);
-        return this.queryById(article.getArticleId());
-    }
 
-    /**
-     * 通过主键删除数据
-     *
-     * @param articleId 主键
-     * @return 是否成功
-     */
-    @Override
-    public boolean deleteById(Integer articleId) {
-        return this.articleDao.deleteById(articleId) > 0;
-    }
 }

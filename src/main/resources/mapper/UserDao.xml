@@ -73,9 +73,14 @@
 
 
     <!--通过主键修改状态-->
-    <update id="updateStatus">
+    <update id="update">
         update cdc.user
-           set status = #{status}
+           <set>
+               status = #{status}
+               <if test='deptId != null and deptId != "" '>
+                   ,deptId= #{deptId}
+               </if>
+            </set>
         where user_id = #{userId}
     </update>
 

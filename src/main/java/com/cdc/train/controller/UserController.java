@@ -30,25 +30,25 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("checkUser")
-    public Result checkUser(@RequestBody Map<String,Object> params){
-        if (params.isEmpty()||!params.containsKey("userId")) {
-            return new Result(ResultCode.ERROR,"参数为空");
+    public Result checkUser(@RequestBody Map<String, Object> params) {
+        if (params.isEmpty() || !params.containsKey("userId")) {
+            return new Result(ResultCode.ERROR, "参数为空");
         }
         try {
             return userService.checkUser(params);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new Result(ResultCode.ERROR, "保存失败：" + e.getMessage());
         }
     }
 
     @RequestMapping("updateStatus")
-    public Result updateStatus(@RequestBody Map<String,Object> params){
-        if (params.isEmpty()||!params.containsKey("status")||!params.containsKey("userId")) {
-            return new Result(ResultCode.ERROR,"参数为空");
+    public Result updateStatus(@RequestBody Map<String, Object> params) {
+        if (params.isEmpty() || !params.containsKey("status") || !params.containsKey("userId")) {
+            return new Result(ResultCode.ERROR, "参数为空");
         }
         try {
             return userService.updateStatus(params);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new Result(ResultCode.ERROR, "保存失败：" + e.getMessage());
         }
     }
@@ -59,10 +59,10 @@ public class UserController {
      * @return
      */
     @PostMapping("addUser")
-    public Result insertUser(@RequestBody UserDTO user){
+    public Result insertUser(@RequestBody UserDTO user) {
         try {
             return userService.insert(user);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new Result(ResultCode.ERROR, "保存失败：" + e.getMessage());
         }
     }
@@ -70,44 +70,30 @@ public class UserController {
 
     /***
      *  通过ID查询单条数据
-     * @param userId
+     * @param params
      * @return
      */
     @PostMapping("queryById")
-    public Result queryById(@RequestBody Map<String,Object> params){
-        if (params.isEmpty()&&params.containsKey("userId")) {
-            return new Result(ResultCode.ERROR,"参数为空");
+    public Result queryById(@RequestBody Map<String, Object> params) {
+        if (params.isEmpty() && params.containsKey("userId")) {
+            return new Result(ResultCode.ERROR, "参数为空");
         }
         try {
             return userService.queryById(params.get("userId").toString());
-        }catch (Exception e){
+        } catch (Exception e) {
             return new Result(ResultCode.ERROR, "保存失败：" + e.getMessage());
         }
     }
 
 
     /***
-     *  通过userId 删除用户数据
-     * @param userId
-     * @return
-     */
-    @PostMapping("deleteUserById")
-    public Result deleteById(String userId){
-       boolean flag =  userService.deleteById(userId);
-      if(flag){
-          return new Result(ResultCode.SUCCESS,"删除成功");
-      }
-      return new Result(ResultCode.PARAM_IS_INVALID,"删除失败");
-    }
-
-    /***
      * @return
      */
     @PostMapping("queryAllUser")
-    public Result queryAllUser(@RequestBody Map<String,Object> params) {
+    public Result queryAllUser(@RequestBody Map<String, Object> params) {
         try {
             return userService.queryAllUser(params);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new Result(ResultCode.ERROR, "保存失败：" + e.getMessage());
         }
     }
@@ -115,15 +101,16 @@ public class UserController {
 
     /**
      * 根据用户所传id修改用户信息
-     * @param user
+     *
+     * @param params
      * @return
      */
     @PutMapping("updateUser")
-    public Result update(@RequestBody User user){
-        User updateUser = userService.update(user);
-        if(updateUser != null ){
-            return new Result(ResultCode.SUCCESS,updateUser);
+    public Result update(@RequestBody Map<String, Object> params) {
+        try {
+            return userService.update(params);
+        } catch (Exception e) {
+            return new Result(ResultCode.ERROR, "保存失败：" + e.getMessage());
         }
-        return new Result(ResultCode.PARAM_IS_INVALID,"修改失败");
     }
 }

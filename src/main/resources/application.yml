@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.139.23:3306/cdc?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/cdc?serverTimezone=UTC
     password: 123456
     username: root
 
@@ -12,6 +12,8 @@ spring:
 
 logging:
   level:
+    com.cdc.train: debug
+#  config: classpath:log4j-spring.xml
     root: info
   config: classpath:log4j-spring.xml
 

@@ -1,12 +1,14 @@
 package com.cdc.train.controller;
 
+import com.cdc.train.common.Result;
+import com.cdc.train.common.ResultCode;
 import com.cdc.train.entity.Article;
 import com.cdc.train.service.ArticleService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * (Article)表控制层
@@ -29,9 +31,45 @@ public class ArticleController {
      * @param id 主键
      * @return 单条数据
      */
-    @GetMapping("selectOne")
-    public Article selectOne(Integer id) {
-        return this.articleService.queryById(id);
+    @GetMapping("queryById")
+    public Result queryById(@RequestParam("id") int id) {
+        if (StringUtils.isEmpty(id) || id==0){
+            return new Result(ResultCode.ERROR,"id为空");
+        }
+        try {
+            return articleService.queryById(id);
+        } catch (Exception e) {
+            return new Result(ResultCode.ERROR, "保存失败：" + e.getMessage());
+        }
+    }
+    /**
+     * 通过主键查询单条数据
+     *
+     * @param params 主键
+     * @return 单条数据
+     */
+    @GetMapping("queryByUserId")
+    public Result queryByUserId(@RequestBody  Map<String,Object> params) {
+        if (params.isEmpty()||!params.containsKey("userId")){
+            return new Result(ResultCode.ERROR,"userId为空");
+        }
+        try {
+            return articleService.queryAllByLimit(params);
+        } catch (Exception e) {
+            return new Result(ResultCode.ERROR, "保存失败：" + e.getMessage());
+        }
+    }
+
+    @RequestMapping("selFavoriteByUserId")
+    public Result selFavoriteByUserId(@RequestBody Map<String,Object> params){
+        if (params.isEmpty()||!params.containsKey("userId")){
+            return new Result(ResultCode.ERROR,"userId为空");
+        }
+        try {
+            return articleService.selFavoriteByUserId(params);
+        } catch (Exception e) {
+            return new Result(ResultCode.ERROR, "保存失败：" + e.getMessage());
+        }
     }
 
 }
