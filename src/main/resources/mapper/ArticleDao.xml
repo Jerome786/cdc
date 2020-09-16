@@ -18,10 +18,19 @@
 
     <resultMap id="ResultDTO" type="com.cdc.train.entity.dto.ArticleDTO" extends="ArticleMap">
         <result property="pulisher" column="pulisher" jdbcType="VARCHAR"/>
+        <result property="typeName" column="typeName" jdbcType="VARCHAR"/>
     </resultMap>
 
+
+    <insert id="addFavorite" >
+        insert into user_article(user_id,article_id,favorite)values(#{userId},#{articleId},#{favorite})
+    </insert>
+    <delete id="delFavorite">
+        delete  from user_article where user_id = #{userId} AND  article_id =#{articleId}
+    </delete>
+
     <select id="selFavoriteByUserId" resultMap="ResultDTO">
-        select distinct a.article_id, a.title, a.images,u.nickname as pulisher,a.create_time,a.user_id
+        select distinct a.price,a.article_id, a.title, a.images,u.nickname as pulisher,a.create_time,a.user_id
         from user_article au
         left join article a on au.user_id = a.user_id
         left join user u on a.user_id =  u.user_id
@@ -29,10 +38,11 @@
     </select>
 
     <!--查询单个-->
-    <select id="queryById" resultMap="ArticleMap">
+    <select id="queryById" resultMap="ResultDTO">
         select
-          article_id, title, content, images, create_time, update_time, user_id, status,price
-        from cdc.article
+          article_id, title, content, images, create_time, update_time, user_id, status,price,t.name as typeName
+        from cdc.article a
+        left join `type`  t on a.type_id = t.id
         where article_id = #{articleId} AND `condition` = 1
     </select>
 

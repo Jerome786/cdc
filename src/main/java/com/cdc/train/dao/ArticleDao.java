@@ -1,8 +1,8 @@
 package com.cdc.train.dao;
 
 import com.cdc.train.entity.Article;
+import com.cdc.train.entity.UserArticle;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -65,4 +65,10 @@ public interface ArticleDao {
     int deleteById(Integer articleId);
 
     List<Article> selFavoriteByUserId(Map<String, Object> params);
+
+    int addFavorite(Map<String, Object> params);
+
+    int delFavorite(Map<String, Object> params);
+
+    UserArticle selFavorite(Map<String, Object> params);
 }

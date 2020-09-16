@@ -2,7 +2,6 @@ package com.cdc.train.controller;
 
 import com.cdc.train.common.Result;
 import com.cdc.train.common.ResultCode;
-import com.cdc.train.entity.Article;
 import com.cdc.train.service.ArticleService;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +24,40 @@ public class ArticleController {
     @Resource
     private ArticleService articleService;
 
+    @RequestMapping("selFavorite")
+    public Result selFavorite (@RequestBody Map<String,Object> params){
+        try {
+            return articleService.selFavorite(params);
+        } catch (Exception e) {
+            return new Result(ResultCode.ERROR, "保存失败：" + e.getMessage());
+        }
+    }
+
+    /**
+     * 取消收藏
+     * @param params
+     * @return
+     */
+    @RequestMapping("delFavorite")
+    public Result delFavorite(@RequestBody Map<String,Object> params){
+        try {
+            return articleService.delFavorite(params);
+        } catch (Exception e) {
+            return new Result(ResultCode.ERROR, "保存失败：" + e.getMessage());
+        }
+    }
+
+    /**
+     * 收藏
+     */
+    @RequestMapping("addFavorite")
+    public Result addFavorite(@RequestBody Map<String,Object> params){
+        try {
+            return articleService.addFavorite(params);
+        } catch (Exception e) {
+            return new Result(ResultCode.ERROR, "保存失败：" + e.getMessage());
+        }
+    }
     /**
      * 通过主键查询单条数据
      *

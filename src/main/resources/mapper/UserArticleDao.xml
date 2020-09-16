@@ -11,12 +11,14 @@
         <result property="message" column="message" jdbcType="VARCHAR"/>
     </resultMap>
 
+
+
     <!--查询单个-->
-    <select id="queryById" resultMap="UserArticleMap">
+    <select id="selFavorite" resultMap="UserArticleMap">
         select
-          id, user_id, article_id, favorite, like, message
+          id, user_id, article_id, favorite, message
         from cdc.user_article
-        where id = #{id}
+        where user_id = #{userId} and article_id = #{articleId}
     </select>
 
     <!--查询指定行数据-->

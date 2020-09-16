@@ -4,6 +4,7 @@ import com.cdc.train.entity.UserArticle;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * (UserArticle)表数据库访问层
@@ -63,4 +64,5 @@ public interface UserArticleDao {
      */
     int deleteById(Integer id);
 
+    UserArticle selFavorite(Map<String, Object> params);
 }

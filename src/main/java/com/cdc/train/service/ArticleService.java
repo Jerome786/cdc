@@ -1,9 +1,7 @@
 package com.cdc.train.service;
 
 import com.cdc.train.common.Result;
-import com.cdc.train.entity.Article;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,4 +31,10 @@ public interface ArticleService {
 
 
     Result selFavoriteByUserId(Map<String, Object> params);
+
+    Result addFavorite(Map<String, Object> params);
+
+    Result delFavorite(Map<String, Object> params);
+
+    Result selFavorite(Map<String, Object> params);
 }
