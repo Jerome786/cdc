@@ -30,11 +30,11 @@
     </delete>
 
     <select id="selFavoriteByUserId" resultMap="ResultDTO">
-        select distinct a.price,a.article_id, a.title, a.images,u.nickname as pulisher,a.create_time,a.user_id
+        select  a.price,a.article_id, a.title, a.images,u.nickname as pulisher,a.create_time,a.user_id
         from user_article au
         left join article a on au.user_id = a.user_id
         left join user u on a.user_id =  u.user_id
-        where au.user_id = #{userId} and au.favorite = 1 and a.`condition` = 1
+        where au.user_id = #{userId} and au.favorite = 1 and a.`condition` = 1  GROUP BY a.article_id
     </select>
 
     <!--查询单个-->
