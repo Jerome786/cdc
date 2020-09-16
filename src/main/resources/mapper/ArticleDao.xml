@@ -21,7 +21,7 @@
     </resultMap>
 
     <select id="selFavoriteByUserId" resultMap="ResultDTO">
-        select a.article_id, a.title, a.images,u.nickname as pulisher,a.create_time,a.user_id
+        select distinct a.article_id, a.title, a.images,u.nickname as pulisher,a.create_time,a.user_id
         from user_article au
         left join article a on au.user_id = a.user_id
         left join user u on a.user_id =  u.user_id
