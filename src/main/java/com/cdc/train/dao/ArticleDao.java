@@ -2,6 +2,7 @@ package com.cdc.train.dao;
 
 import com.cdc.train.entity.Article;
 import com.cdc.train.entity.UserArticle;
+import com.cdc.train.entity.dto.ArticleDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -15,6 +16,15 @@ import java.util.Map;
  */
 @Mapper
 public interface ArticleDao {
+
+
+    /**
+     * 带条件查询列表
+     * @param map
+     * @return
+     */
+    List<ArticleDTO> getAllByMap(Map<String, Object> map);
+
 
     /**
      * 通过ID查询单条数据

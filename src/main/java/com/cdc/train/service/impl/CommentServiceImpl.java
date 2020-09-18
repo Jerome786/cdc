@@ -2,12 +2,12 @@ package com.cdc.train.service.impl;
 
 import com.cdc.train.dao.CommentDao;
 import com.cdc.train.entity.Comment;
+import com.cdc.train.entity.dto.CommentDTO;
 import com.cdc.train.service.CommentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Random;
 
 /**
  * (Comment)表服务实现类
@@ -85,7 +85,7 @@ public class CommentServiceImpl implements CommentService {
      */
     @Override
     public List selectByArticleId(Comment comment) {
-        List<Comment> list = commentDao.queryAll(comment);
+        List<CommentDTO> list = commentDao.selectByArticleId(comment);
         return list;
     }
 }

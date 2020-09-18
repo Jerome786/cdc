@@ -1,5 +1,7 @@
 package com.cdc.train.controller;
 
+import com.cdc.train.common.Result;
+import com.cdc.train.common.ResultCode;
 import com.cdc.train.entity.Comment;
 import com.cdc.train.service.CommentService;
 import org.springframework.http.HttpStatus;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Comment)表控制层
@@ -27,7 +30,7 @@ public class CommentController {
     /**
      * 通过主键查询单条数据
      *
-     * @param id 主键
+     * @param Id 主键
      * @return 单条数据
      */
     @RequestMapping(value = "/selectOne/{Id}", method = { RequestMethod.GET, RequestMethod.POST })
@@ -60,7 +63,7 @@ public class CommentController {
 
     /**
      * 删除
-     * @param id
+     * @param Id
      * @return
      */
     @RequestMapping(value = "/delete/{Id}", method = { RequestMethod.GET, RequestMethod.POST })
@@ -73,14 +76,18 @@ public class CommentController {
 
     /**
      * 查看文章下的ID
-     * @param articleId
+     * @param params
      * @return
      */
-    @RequestMapping(value = "/selectByArticleId/{articleId}", method = { RequestMethod.GET, RequestMethod.POST })
-    public Object selectByArticleId(@PathVariable("articleId") Integer articleId) {
+    @RequestMapping("/selectByArticleId")
+    public Result selectByArticleId(@RequestBody Map<String,Object> params) {
+        if (params.isEmpty()||!params.containsKey("articleId")){
+            return new Result(ResultCode.ERROR,"参数异常");
+        }
+        Integer articleId = (Integer) params.get("articleId");
         Comment comment = new Comment();
         comment.setArticleId(articleId);
         List list=commentService.selectByArticleId(comment);
-        return ResponseEntity.ok(list);
+        return new Result(ResultCode.SUCCESS,list);
     }
 }

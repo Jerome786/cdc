@@ -1,6 +1,8 @@
 package com.cdc.train.service;
 
 import com.cdc.train.common.Result;
+import com.cdc.train.entity.dto.ArticleDTO;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
@@ -28,8 +30,6 @@ public interface ArticleService {
     Result queryAllByLimit(Map<String,Object> params);
 
 
-
-
     Result selFavoriteByUserId(Map<String, Object> params);
 
     Result addFavorite(Map<String, Object> params);
@@ -37,4 +37,27 @@ public interface ArticleService {
     Result delFavorite(Map<String, Object> params);
 
     Result selFavorite(Map<String, Object> params);
+
+    /**
+     * 新增数据
+     *
+     * @param articleDTO 实例对象
+     * @return 实例对象
+     */
+    Result insert(ArticleDTO articleDTO);
+
+    /**
+     * 新增图片
+     *
+     * @param imgFile 上传的图片文件
+     * @return 实例对象
+     */
+    Result issueImages(MultipartFile imgFile);
+
+    /**
+     * 根据条件筛选获取所有的文章
+     * @param map
+     * @return
+     */
+    Result getAllByMap(Map<String, Object> map);
 }

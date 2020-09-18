@@ -10,8 +10,8 @@
     <!--查询单个-->
     <select id="queryById" resultMap="TypeMap">
         select
-          id, name
-        from cdc.type
+          id, `name`
+        from `type`
         where id = #{id}
     </select>
 

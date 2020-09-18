@@ -1,6 +1,7 @@
 package com.cdc.train.dao;
 
 import com.cdc.train.entity.Comment;
+import com.cdc.train.entity.dto.CommentDTO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -63,4 +64,5 @@ public interface CommentDao {
      */
     int deleteById(Integer commentId);
 
+    List<CommentDTO> selectByArticleId(Comment comment);
 }

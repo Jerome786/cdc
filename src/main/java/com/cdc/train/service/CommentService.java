@@ -1,6 +1,7 @@
 package com.cdc.train.service;
 
 import com.cdc.train.entity.Comment;
+import com.cdc.train.entity.dto.CommentDTO;
 
 import java.util.List;
 
@@ -53,5 +54,5 @@ public interface CommentService {
      */
     boolean deleteById(Integer commentId);
 
-    List selectByArticleId(Comment comment);
+    List<CommentDTO> selectByArticleId(Comment comment);
 }

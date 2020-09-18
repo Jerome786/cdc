@@ -1,6 +1,7 @@
 package com.cdc.train.dao;
 
 import com.cdc.train.entity.Type;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * @author makejava
  * @since 2020-08-25 15:38:44
  */
+@Mapper
 public interface TypeDao {
 
     /**

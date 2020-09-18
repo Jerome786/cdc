@@ -21,8 +21,9 @@ public enum ResultCode {
     USER_HAS_EXISTED(20001, "用户名已存在"),
 
     /* 用户错误：20001-29999*/
-    TYPE_NOT_FOUND(20002,"分类不存在");
+    TYPE_NOT_FOUND(20002,"分类不存在"),
 
+    USER_IS_NOT_FOUND(20003,"用户不存在");
     private Integer code;
 
     private String message;

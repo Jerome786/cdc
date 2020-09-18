@@ -76,4 +76,9 @@ public class TypeServiceImpl implements TypeService {
     public boolean deleteById(Integer id) {
         return this.typeDao.deleteById(id) > 0;
     }
+
+    @Override
+    public List<Type> queryAll() {
+        return typeDao.queryAll(new Type());
+    }
 }

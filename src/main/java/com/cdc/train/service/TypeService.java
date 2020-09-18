@@ -53,4 +53,5 @@ public interface TypeService {
      */
     boolean deleteById(Integer id);
 
+    List<Type> queryAll();
 }
