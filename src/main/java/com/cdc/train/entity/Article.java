@@ -26,11 +26,21 @@ public class Article implements Serializable {
 
     private String userId;
 
+    private String typeId;
+
     private String status;
 
     private String condition;
 
     private double price;
+
+    public String getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
+    }
 
     public double getPrice() {
         return price;
