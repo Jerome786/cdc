@@ -1,5 +1,7 @@
 package com.cdc.train.service.impl;
 
+import com.cdc.train.common.Result;
+import com.cdc.train.common.ResultCode;
 import com.cdc.train.dao.CommentDao;
 import com.cdc.train.entity.Comment;
 import com.cdc.train.entity.dto.CommentDTO;
@@ -7,7 +9,10 @@ import com.cdc.train.service.CommentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Comment)表服务实现类
@@ -87,5 +92,26 @@ public class CommentServiceImpl implements CommentService {
     public List selectByArticleId(Comment comment) {
         List<CommentDTO> list = commentDao.selectByArticleId(comment);
         return list;
+    }
+
+    @Override
+    public Result selParentComment(String userId) {
+        return new Result(ResultCode.SUCCESS,commentDao.selParentComment(userId));
+    }
+
+    @Override
+    public Result replay(String userId) {
+        List<CommentDTO> resultList = new ArrayList<>();
+        Comment comment = new Comment();
+        comment.setUserId(userId);
+        //获取我的评论
+        List<Comment> commentList = commentDao.queryAll(comment);
+        for (Comment comment1 : commentList) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("userId", userId);
+            params.put("commentParentId",comment1.getCommentId());
+            resultList.addAll(commentDao.queryChildren(params));
+        }
+        return new Result(ResultCode.SUCCESS,resultList);
     }
 }

@@ -61,7 +61,7 @@
         from cdc.user u
         left join user_info ui on u.user_id = ui.user_id
         left join user_role ur on u.user_id = ur.user_id
-        where ur.role_id = "2"
+        where ur.role_id = "2" AND status = 0
     </select>
 
     <!--新增所有列-->

@@ -16,7 +16,22 @@
         <result property="pUserId" column="pUserId" jdbcType="VARCHAR"/>
         <result property="pNickname" column="pNickname" jdbcType="VARCHAR"/>
         <result property="pcontent" column="pcontent" jdbcType="VARCHAR"/>
+        <result property="images" column="images" jdbcType="VARCHAR"/>
     </resultMap>
+    <select id="queryChildren" resultMap="ResultDTO">
+        SELECT c.comment_id,c.content,u.avatar as avatar,u.nickname as nickname,c.article_id,a.images as images  from `comment` c
+        LEFT JOIN article a on c.article_id = a.article_id
+        LEFT JOIN `user` u on a.user_id = u.user_id
+        WHERE c.comment_parent_id = #{commentParentId} AND c.user_id != #{userId}
+    </select>
+
+    <select id="selParentComment" resultMap="ResultDTO">
+        SELECT c.comment_id,c.content,u2.avatar as avatar,u2.nickname as nickname,c.article_id,a.images as images from `comment` c
+        LEFT JOIN article a on c.article_id = a.article_id
+        LEFT JOIN `user` u1 on a.user_id = u1.user_id
+        LEFT JOIN `user` u2 on c.user_id = u2.user_id
+        where a.user_id = #{userId} and c.user_id !=#{userId} and comment_parent_id is null
+    </select>
 
     <!--查询指定行数据-->
     <select id="selectByArticleId" resultMap="ResultDTO">

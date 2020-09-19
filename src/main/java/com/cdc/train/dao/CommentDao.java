@@ -5,6 +5,7 @@ import com.cdc.train.entity.dto.CommentDTO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Comment)表数据库访问层
@@ -65,4 +66,8 @@ public interface CommentDao {
     int deleteById(Integer commentId);
 
     List<CommentDTO> selectByArticleId(Comment comment);
+
+    List<CommentDTO> selParentComment(String userId);
+
+    List<CommentDTO> queryChildren(Map<String, Object> params);
 }

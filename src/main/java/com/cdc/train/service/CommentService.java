@@ -1,5 +1,6 @@
 package com.cdc.train.service;
 
+import com.cdc.train.common.Result;
 import com.cdc.train.entity.Comment;
 import com.cdc.train.entity.dto.CommentDTO;
 
@@ -55,4 +56,8 @@ public interface CommentService {
     boolean deleteById(Integer commentId);
 
     List<CommentDTO> selectByArticleId(Comment comment);
+
+    Result selParentComment(String userId);
+
+    Result replay(String userId);
 }
