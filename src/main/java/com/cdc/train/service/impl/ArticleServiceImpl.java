@@ -8,6 +8,7 @@ import com.cdc.train.entity.Article;
 import com.cdc.train.entity.UserArticle;
 import com.cdc.train.entity.dto.ArticleDTO;
 import com.cdc.train.service.ArticleService;
+import com.cdc.train.utils.UploadUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -137,8 +138,7 @@ public class ArticleServiceImpl implements ArticleService {
             }
 
             // 存放上传图片的文件夹
-//            File fileDir = UploadUtil.getImgDirFile();
-            File fileDir = new File("");
+            File fileDir = UploadUtil.getImgDirFile();
 
             // 输出文件夹绝对路径  -- 这里的绝对路径是相当于当前项目的路径而不是“容器”路径
             System.out.println(fileDir.getAbsolutePath());

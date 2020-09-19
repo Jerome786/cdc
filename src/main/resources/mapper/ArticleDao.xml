@@ -149,10 +149,10 @@
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="articleId" useGeneratedKeys="true">
-        insert into cdc.article(title, content, images, create_time, update_time, user_id, status, condition)
-        values (#{title}, #{content}, #{images}, #{createTime}, #{updateTime}, #{userId}, #{status}, #{condition})
-    </insert>
+<!--    <insert id="insert" keyProperty="articleId" useGeneratedKeys="true">-->
+<!--        insert into cdc.article(title, content, images, create_time, update_time, user_id, status, condition)-->
+<!--        values (#{title}, #{content}, #{images}, #{createTime}, #{updateTime}, #{userId}, #{status}, #{condition})-->
+<!--    </insert>-->
 
     <!--通过主键修改数据-->
     <update id="update">
