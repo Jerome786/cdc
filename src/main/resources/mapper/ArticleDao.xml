@@ -37,7 +37,7 @@
     </sql>
 
     <!-- 带条件查询article列表 -->
-    <select id="getAllByMap" parameterType="Map" resultMap="DtoResultMap">
+    <select id="getAllByMap" parameterType="Map" resultMap="ResultDTO">
         SELECT
         ua.FAVORITE_AMOUNT,
         <include refid="Base_Column_List"/>
