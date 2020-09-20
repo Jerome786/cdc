@@ -21,7 +21,7 @@
     <select id="queryChildren" resultMap="ResultDTO">
         SELECT c.comment_id,c.content,u.avatar as avatar,u.nickname as nickname,c.article_id,a.images as images  from `comment` c
         LEFT JOIN article a on c.article_id = a.article_id
-        LEFT JOIN `user` u on a.user_id = u.user_id
+        LEFT JOIN `user` u on c.user_id = u.user_id
         WHERE c.comment_parent_id = #{commentParentId} AND c.user_id != #{userId}
     </select>
 

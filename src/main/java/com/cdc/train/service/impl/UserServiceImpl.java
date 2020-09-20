@@ -4,12 +4,13 @@ import com.cdc.train.common.Result;
 import com.cdc.train.common.ResultCode;
 import com.cdc.train.dao.UserDao;
 import com.cdc.train.dao.UserInfoDao;
+import com.cdc.train.dao.UserRoleDao;
 import com.cdc.train.entity.User;
 import com.cdc.train.entity.UserInfo;
+import com.cdc.train.entity.UserRole;
 import com.cdc.train.entity.dto.UserDTO;
 import com.cdc.train.service.UserService;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -32,6 +33,8 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
     @Resource
     private UserInfoDao userInfoDao;
+    @Resource
+    private UserRoleDao userRoleDao;
 
     /**
      * 通过ID查询单条数据
@@ -105,6 +108,12 @@ public class UserServiceImpl implements UserService {
         userInfo.setName(user.getRealName());
         userInfo.setGender(user.getGender());
         userInfoDao.insert(userInfo);
+
+        UserRole userRole = new UserRole();
+        userRole.setRoleId(user.getRoleId());
+        userRole.setUserId(user.getUserId());
+
+        userRoleDao.insert(userRole);
 
         User newUser = new User();
         BeanUtils.copyProperties(user,newUser);

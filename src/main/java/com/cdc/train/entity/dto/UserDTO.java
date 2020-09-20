@@ -5,8 +5,17 @@ import com.cdc.train.entity.User;
 public class UserDTO extends User {
     private String realName;
     private String gender;
-    private String roleId;
+    private Integer roleId;
     private String roleName;
+    private String deptName;
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
 
     public String getRoleName() {
         return roleName;
@@ -16,11 +25,11 @@ public class UserDTO extends User {
         this.roleName = roleName;
     }
 
-    public String getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(String roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 

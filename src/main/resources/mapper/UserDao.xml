@@ -21,6 +21,7 @@
         <result property="roleName" column="roleName" jdbcType="VARCHAR" />
         <result property="realName" column="realName" jdbcType="VARCHAR" />
         <result property="gender" column="gender" jdbcType="VARCHAR" />
+        <result property="deptName" column="deptName" jdbcType="VARCHAR" />
     </resultMap>
     <!--通过用户id查询单个-->
     <select id="queryById" resultMap="ResultDTO" parameterType="String">
@@ -57,10 +58,12 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="ResultDTO">
         select
-        u.user_id, create_time, nickname, avatar, status,ui.name as realName
+        u.user_id, create_time, nickname, avatar, status,ui.name as realName,u.email,
+        ui.gender as gender,d.dept_name as deptName,u.phone
         from cdc.user u
         left join user_info ui on u.user_id = ui.user_id
         left join user_role ur on u.user_id = ur.user_id
+         LEFT JOIN department d on u.dept_id = d.dept_id
         where ur.role_id = "2" AND status = 0
     </select>
 

@@ -40,8 +40,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
-        insert into cdc.user_role()
-        values ()
+        insert into cdc.user_role(user_id,role_id)
+        values (#{userId},#{roleId})
     </insert>
 
     <!--通过主键修改数据-->
