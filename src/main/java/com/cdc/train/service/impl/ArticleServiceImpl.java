@@ -10,6 +10,7 @@ import com.cdc.train.entity.dto.ArticleDTO;
 import com.cdc.train.service.ArticleService;
 import com.cdc.train.utils.UploadUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -180,6 +181,17 @@ public class ArticleServiceImpl implements ArticleService {
         return new Result(ResultCode.SUCCESS, data);
     }
 
+    @Override
+    @Transactional
+    public Result delArticle(Integer articleId) {
+        Article article = articleDao.queryById(articleId);
+        if (article == null){
+            return new Result(ResultCode.ERROR,"不存在该文章");
+        }
+        articleDao.deleteById(articleId);
+        userArticleDao.deleteByArticleId(articleId);
+        return  new Result(ResultCode.SUCCESS,"成功删除");
+    }
 
 
 }

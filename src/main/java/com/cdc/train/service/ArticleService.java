@@ -60,4 +60,6 @@ public interface ArticleService {
      * @return
      */
     Result getAllByMap(Map<String, Object> map);
+
+    Result delArticle(Integer articleId);
 }

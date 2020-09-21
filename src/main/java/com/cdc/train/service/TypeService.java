@@ -1,5 +1,6 @@
 package com.cdc.train.service;
 
+import com.cdc.train.entity.Department;
 import com.cdc.train.entity.Type;
 
 import java.util.List;
@@ -54,4 +55,6 @@ public interface TypeService {
     boolean deleteById(Integer id);
 
     List<Type> queryAll();
+
+    List<Department> queryAllDept();
 }

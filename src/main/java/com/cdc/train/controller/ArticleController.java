@@ -31,6 +31,14 @@ public class ArticleController {
     @Resource
     private ArticleService articleService;
 
+    @RequestMapping("delArticle")
+    public Result delArticle(@RequestParam("articleId")Integer articleId){
+        if (StringUtils.isEmpty(articleId)){
+            return new Result(ResultCode.ERROR,"参数异常");
+        }
+        return articleService.delArticle(articleId);
+    }
+
     @PostMapping("issueArticle")
     public Result issueArticle(@RequestBody ArticleDTO articleDTO) {
 

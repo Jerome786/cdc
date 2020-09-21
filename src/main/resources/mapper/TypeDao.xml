@@ -7,6 +7,15 @@
         <result property="name" column="name" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <resultMap id="DeptMap" type="com.cdc.train.entity.Department">
+        <result property="deptId" column="dept_id" jdbcType="VARCHAR"/>
+        <result property="deptName" column="dept_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryAllDept" resultMap="DeptMap">
+        select dept_id,dept_name from department
+    </select>
+
     <!--查询单个-->
     <select id="queryById" resultMap="TypeMap">
         select

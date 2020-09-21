@@ -2,11 +2,11 @@ package com.cdc.train.controller;
 
 import com.cdc.train.common.Result;
 import com.cdc.train.common.ResultCode;
+import com.cdc.train.entity.Department;
 import com.cdc.train.entity.Type;
 import com.cdc.train.service.TypeService;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,9 +39,18 @@ public class TypeController {
         return this.typeService.queryById(id);
     }
 
-    @PostMapping("/queryAll")
+    @RequestMapping("/queryAll")
     public Result queryAll(){
         List<Type> typeList = typeService.queryAll();
+        if (CollectionUtils.isEmpty(typeList) || typeList.size() <= 0){
+            return new Result(ResultCode.TYPE_NOT_FOUND);
+        }
+        return new Result(ResultCode.SUCCESS,typeList);
+    }
+
+    @RequestMapping("/queryAllDept")
+    public Result queryAllDept(){
+        List<Department> typeList = typeService.queryAllDept();
         if (CollectionUtils.isEmpty(typeList) || typeList.size() <= 0){
             return new Result(ResultCode.TYPE_NOT_FOUND);
         }

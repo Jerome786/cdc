@@ -1,5 +1,6 @@
 package com.cdc.train.dao;
 
+import com.cdc.train.entity.Department;
 import com.cdc.train.entity.Type;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -65,4 +66,5 @@ public interface TypeDao {
      */
     int deleteById(Integer id);
 
+    List<Department> queryAllDept();
 }

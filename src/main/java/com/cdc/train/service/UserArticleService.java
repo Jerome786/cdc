@@ -51,6 +51,6 @@ public interface UserArticleService {
      * @param id 主键
      * @return 是否成功
      */
-    boolean deleteById(Integer id);
+//    boolean deleteById(Integer id);
 
 }

@@ -72,8 +72,8 @@ public class UserArticleServiceImpl implements UserArticleService {
      * @param id 主键
      * @return 是否成功
      */
-    @Override
-    public boolean deleteById(Integer id) {
-        return this.userArticleDao.deleteById(id) > 0;
-    }
+//    @Override
+//    public boolean deleteById(Integer id) {
+//        return this.userArticleDao.deleteByArticleId(id) > 0;
+//    }
 }

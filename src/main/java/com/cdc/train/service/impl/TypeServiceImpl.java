@@ -1,6 +1,7 @@
 package com.cdc.train.service.impl;
 
 import com.cdc.train.dao.TypeDao;
+import com.cdc.train.entity.Department;
 import com.cdc.train.entity.Type;
 import com.cdc.train.service.TypeService;
 import org.springframework.stereotype.Service;
@@ -80,5 +81,10 @@ public class TypeServiceImpl implements TypeService {
     @Override
     public List<Type> queryAll() {
         return typeDao.queryAll(new Type());
+    }
+
+    @Override
+    public List<Department> queryAllDept() {
+        return typeDao.queryAllDept();
     }
 }

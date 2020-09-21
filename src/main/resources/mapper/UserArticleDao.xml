@@ -86,8 +86,8 @@
     </update>
 
     <!--通过主键删除-->
-    <delete id="deleteById">
-        delete from cdc.user_article where id = #{id}
+    <delete id="deleteByArticleId">
+        delete from cdc.user_article where article_id = #{id}
     </delete>
 
 </mapper>
