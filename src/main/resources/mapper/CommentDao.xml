@@ -113,4 +113,8 @@
         delete from cdc.comment where comment_id = #{commentId}
     </delete>
 
+    <delete id="deleteByArticleId">
+        delete from cdc.comment where article_id = #{articleId}
+    </delete>
+
 </mapper>

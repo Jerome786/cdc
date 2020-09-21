@@ -70,4 +70,6 @@ public interface CommentDao {
     List<CommentDTO> selParentComment(String userId);
 
     List<CommentDTO> queryChildren(Map<String, Object> params);
+
+    int deleteByArticleId(Integer articleId);
 }

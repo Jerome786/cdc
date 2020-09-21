@@ -3,6 +3,7 @@ package com.cdc.train.service.impl;
 import com.cdc.train.common.Result;
 import com.cdc.train.common.ResultCode;
 import com.cdc.train.dao.ArticleDao;
+import com.cdc.train.dao.CommentDao;
 import com.cdc.train.dao.UserArticleDao;
 import com.cdc.train.entity.Article;
 import com.cdc.train.entity.UserArticle;
@@ -30,6 +31,8 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleDao articleDao;
     @Resource
     private UserArticleDao userArticleDao;
+    @Resource
+    private CommentDao commentDao;
 
     /**
      * 通过ID查询单条数据
@@ -190,6 +193,7 @@ public class ArticleServiceImpl implements ArticleService {
         }
         articleDao.deleteById(articleId);
         userArticleDao.deleteByArticleId(articleId);
+        commentDao.deleteByArticleId(articleId);
         return  new Result(ResultCode.SUCCESS,"成功删除");
     }
 
