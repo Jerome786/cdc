@@ -2,16 +2,14 @@ package com.cdc.train.controller;
 
 import com.cdc.train.common.Result;
 import com.cdc.train.common.ResultCode;
-import com.cdc.train.entity.User;
 import com.cdc.train.entity.dto.UserDTO;
 import com.cdc.train.service.UserService;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
-import jdk.nashorn.internal.ir.ReturnNode;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -105,7 +103,7 @@ public class UserController {
      * @param params
      * @return
      */
-    @PutMapping("updateUser")
+    @RequestMapping("updateUser")
     public Result update(@RequestBody Map<String, Object> params) {
         try {
             return userService.update(params);

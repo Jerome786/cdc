@@ -135,7 +135,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public Result update(Map<String,Object> params) {
         int result;
-        if (params.isEmpty()||params.containsKey("userId")){
+        if (params.isEmpty()||!params.containsKey("userId")||!params.containsKey("status")){
             return new Result(ResultCode.ERROR,"参数或userId为空");
         }
         UserDTO queryById = userDao.queryById(params.get("userId").toString());

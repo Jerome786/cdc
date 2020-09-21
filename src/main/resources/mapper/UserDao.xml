@@ -79,12 +79,12 @@
     <update id="update">
         update cdc.user
            <set>
-               status = #{status}
+           status = 0
                <if test='deptId != null and deptId != "" '>
-                   ,deptId= #{deptId}
+                   ,dept_id= #{deptId}
                </if>
             </set>
-        where user_id = #{userId}
+        where user_id = #{userId} and status = 1
     </update>
 
     <!--通过主键删除-->
